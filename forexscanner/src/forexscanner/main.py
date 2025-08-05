@@ -1,13 +1,5 @@
-import oandapyV20
+from forexscanner.oandaclient import OandaClient
 
-from oandapyV20.endpoints.accounts import AccountDetails
-
-import forexscanner.constants as constants
-
-client = oandapyV20.API(
-    access_token=constants.FX_API_KEY, environment=constants.FX_ENVIRONMENT)
-
-request = AccountDetails(accountID=constants.FX_ACCOUNT_ID)
-response = client.request(request)
-
-print(response)
+with OandaClient() as client:
+    # print(client.historical_candles('EUR_USD', granularity='D', start_date='2020-01-01T00:00:00Z'))
+    print(client.latest_candles('EUR_USD', granularity='D', count=1))
