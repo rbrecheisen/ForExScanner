@@ -3,6 +3,8 @@
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
+cd forexscanner
+
 rm poetry.lock
 
 poetry config virtualenvs.create false --local

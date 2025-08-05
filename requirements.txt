@@ -1,1 +1,3 @@
 poetry
+oandapyV20
+six
