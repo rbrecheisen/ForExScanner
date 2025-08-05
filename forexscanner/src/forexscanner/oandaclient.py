@@ -57,7 +57,7 @@ class OandaClient:
     def latest_candles(self, instrument, granularity, count=1):
         params = {
             'granularity': granularity,
-            'count': count + 1,
+            'count': count + 1, # always get one extra, because the latest may not be compete yet
             'price': 'M',
         }
         data = InstrumentsCandles(instrument=instrument, params=params)
