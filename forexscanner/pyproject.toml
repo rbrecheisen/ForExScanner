@@ -1,6 +1,6 @@
 [project]
 name = "forexscanner"
-version = "0.1.0"
+version = "1.0.0"
 description = "ForEx scanner for detecting trading opportunities"
 authors = [
     {name = "Ralph Brecheisen",email = "ralph.brecheisen@gmail.com"}
