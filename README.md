@@ -20,3 +20,6 @@ or a fast/slow EMA crossover.
 If the weekly chart is trending the scanner will then look for buying or selling big shadow candles (in the daily
 chart) with their respective properties: engulfing the previous candles, biggest candle in a while, lots of room 
 to the left and a closing/opening price close to the high/low.
+
+# Technical aspects
+- Weekly EMA 20+50 cross-over + ADX(14) for momentum
