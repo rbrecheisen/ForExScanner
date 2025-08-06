@@ -18,12 +18,12 @@ class OandaClient:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self._client = None
 
-    def account_details(self):
+    def get_account_details(self):
         request = AccountDetails(accountID=constants.FX_ACCOUNT_ID)
         response = self._client.request(request)
         return response
 
-    def historical_candles(self, instrument, granularity, start_date):
+    def get_historical_candles(self, instrument, granularity, start_date):
         all_candles = []
         date_start = datetime.datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%SZ')
         date_now = datetime.datetime.now()
@@ -54,7 +54,7 @@ class OandaClient:
         } for c in completed_candles])
         return df
     
-    def latest_candles(self, instrument, granularity, count=1):
+    def get_latest_candles(self, instrument, granularity, count=1):
         params = {
             'granularity': granularity,
             'count': count + 1, # always get one extra, because the latest may not be compete yet
