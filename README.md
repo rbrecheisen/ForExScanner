@@ -23,3 +23,53 @@ to the left and a closing/opening price close to the high/low.
 
 # Technical aspects
 - Weekly EMA 20+50 cross-over + ADX(14) for momentum
+
+# ATX(14)
+
+Using python how can I calculate ATX(14)?
+
+
+ChatGPT said:
+To calculate ATX(14) (Average True Range Exponential Moving Average with period 14), you can follow these steps in Python using Pandas:
+
+Steps to Calculate ATX(14):
+Calculate True Range (TR).
+
+Calculate Average True Range (ATR(14)).
+
+Calculate the Exponential Moving Average (EMA) of ATR(14) — this is ATX(14).
+
+Python Code Example:
+python
+Copy
+Edit
+import pandas as pd
+
+# Example DataFrame with OHLC
+data = {
+    'High': [120, 125, 130, 128, 132, 135, 138, 140, 142, 145, 147, 150, 152, 155, 158],
+    'Low': [115, 118, 125, 124, 128, 130, 134, 136, 138, 140, 142, 145, 148, 150, 153],
+    'Close': [118, 123, 128, 126, 130, 133, 136, 138, 140, 143, 145, 148, 150, 153, 156]
+}
+df = pd.DataFrame(data)
+
+# 1. Calculate True Range (TR)
+df['prev_close'] = df['Close'].shift(1)
+df['tr1'] = df['High'] - df['Low']
+df['tr2'] = abs(df['High'] - df['prev_close'])
+df['tr3'] = abs(df['Low'] - df['prev_close'])
+df['TR'] = df[['tr1', 'tr2', 'tr3']].max(axis=1)
+
+# 2. Calculate ATR(14)
+df['ATR14'] = df['TR'].rolling(window=14).mean()
+
+# 3. Calculate EMA of ATR(14) --> This is ATX(14)
+df['ATX14'] = df['ATR14'].ewm(span=14, adjust=False).mean()
+
+print(df[['TR', 'ATR14', 'ATX14']])
+Key Point:
+ATX(14) is essentially an EMA of ATR(14).
+
+If you're coding for live trading, you probably want a function that updates this dynamically with each new candle.
+
+Do you want me to give you a version that works directly with Pandas DataFrames from a TradingView export CSV?
