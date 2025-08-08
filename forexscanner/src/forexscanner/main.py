@@ -1,16 +1,9 @@
 import time
 import forexscanner.constants as constants
 from forexscanner.oandaclient import OandaClient
-from forexscanner.mailer import Mailer
 from forexscanner.indicators.ema import EMA
 from forexscanner.indicators.atr import ATR
-
-
-# with OandaClient() as client:
-#     # print(client.historical_candles('EUR_USD', granularity='D', start_date='2020-01-01T00:00:00Z'))
-#     print(client.get_latest_candles('EUR_USD', granularity='D', count=1))
-# with Mailer() as mailer:
-#     mailer.send('OandaClient.get_latest_candles()', 'Success!')
+from forexscanner.mailer import Mailer
 
 
 class ForExScanner:
@@ -39,19 +32,13 @@ class ForExScanner:
         except KeyboardInterrupt:
             print('quiting...')
 
-    def get_weekly_candles(self, symbol):
-        return self._candle_data[symbol]['W']
-
-    def get_daily_candles(self, symbol):
-        return self._candle_data[symbol]['D']
-
     def calculate_weekly_trend(self, candles):
         slow_ema = EMA(constants.FX_SLOW_EMA_PERIOD).calculate(candles)
         fast_ema = EMA(constants.FX_FAST_EMA_PERIOD).calculate(candles)
         offset_ratio = abs(fast_ema - slow_ema) / ATR(14).calculate(candles)
-        if fast_ema > slow_ema and offset_ratio >= 0.5:
+        if fast_ema > slow_ema and offset_ratio >= constants.FX_ATR_OFFSET_RATIO_W:
             return 1
-        if fast_ema < slow_ema and offset_ratio >= 0.5:
+        if fast_ema < slow_ema and offset_ratio >= constants.FX_ATR_OFFSET_RATIO_W:
             return -1
         return 0
     

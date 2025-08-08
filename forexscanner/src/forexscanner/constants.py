@@ -9,7 +9,8 @@ FX_GMAIL_FROM = 'ralph.brecheisen@gmail.com'
 FX_GMAIL_TO = 'r.brecheisen@maastrichtuniversity.nl'
 FX_SLOW_EMA_PERIOD = 50
 FX_FAST_EMA_PERIOD = 20
-FX_EMA_OFFSET = 0
+FX_ATR_OFFSET_RATIO_W = 0.3
+FX_ATR_OFFSET_RATIO_D = 0.5
 FX_SYMBOLS = [
     "EUR_USD",
     "USD_JPY",
