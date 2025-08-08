@@ -48,7 +48,7 @@ class ForExScanner:
     def calculate_weekly_trend(self, candles):
         slow_ema = EMA(constants.FX_SLOW_EMA_PERIOD).calculate(candles)
         fast_ema = EMA(constants.FX_FAST_EMA_PERIOD).calculate(candles)
-        offset_ratio = abs(fast_ema - slow_ema) / ATR(14)
+        offset_ratio = abs(fast_ema - slow_ema) / ATR(14).calculate(candles)
         if fast_ema > slow_ema and offset_ratio >= 0.5:
             return 1
         if fast_ema < slow_ema and offset_ratio >= 0.5:
@@ -57,6 +57,7 @@ class ForExScanner:
     
 
 def main():
+    print('Loading candle data...')
     with OandaClient() as client:
         candle_data = {}
         for symbol in constants.FX_SYMBOLS:
@@ -72,6 +73,7 @@ def main():
                         count=constants.FX_SLOW_EMA_PERIOD,
                     ),
             }
+    print('Running scanner...')
     scanner = ForExScanner(candle_data)
     scanner.start()
 
