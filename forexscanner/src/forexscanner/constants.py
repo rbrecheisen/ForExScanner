@@ -7,3 +7,28 @@ FX_GMAIL_SMTP_HOST = 'smtp.gmail.com'
 FX_GMAIL_SMPT_PORT = 465
 FX_GMAIL_FROM = 'ralph.brecheisen@gmail.com'
 FX_GMAIL_TO = 'r.brecheisen@maastrichtuniversity.nl'
+FX_SLOW_EMA_PERIOD = 50
+FX_FAST_EMA_PERIOD = 20
+FX_EMA_OFFSET = 0
+FX_SYMBOLS = [
+    "EUR_USD",
+    "USD_JPY",
+    "GBP_USD",
+    "USD_CHF",
+    "USD_CAD",
+    "AUD_USD",
+    "NZD_USD",
+    "EUR_GBP",
+    "EUR_JPY",
+    "GBP_JPY",
+    "AUD_JPY",
+    "EUR_CHF",
+    "CHF_JPY",
+    "EUR_AUD",
+    "GBP_CHF",
+    "USD_CNH",
+    "USD_HKD",
+    "USD_SGD",
+    "USD_SEK",
+    "USD_NOK"
+]
